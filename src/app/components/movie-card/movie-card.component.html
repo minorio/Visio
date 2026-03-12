@@ -1,0 +1,27 @@
+<mat-card class="movie-card" appearance="outlined">
+  <img
+    mat-card-image
+    src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
+    alt="Shiba Inu"
+    class="movie-card__image"
+  />
+
+  <div class="movie-card__overlay">
+    <mat-card-header class="movie-card__info">
+      <mat-card-title class="movie-card__title">Film obs sa</mat-card-title>
+      <mat-card-subtitle class="movie-card__rating">
+        <span>1.7</span>
+        <mat-icon>star</mat-icon>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-actions class="movie-card__actions">
+      <mat-icon
+        class="movie-card__favorite"
+        [class.is-active]="isFavorite"
+        (click)="toggleFavorite()"
+        >bookmark</mat-icon
+      >
+    </mat-card-actions>
+  </div>
+</mat-card>
