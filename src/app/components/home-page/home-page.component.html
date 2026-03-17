@@ -1,0 +1,13 @@
+<div class="home">
+  @if (isLoading() && !movies().length) {
+    <div class="home__loader">
+      <mat-spinner strokeWidth="3" diameter="70"></mat-spinner>
+    </div>
+  }
+
+  <section class="home__movies-grid">
+    @for (movieItem of movies(); track movieItem.id) {
+      <movie-card [movie]="movieItem" [genres]="genresMap()"></movie-card>
+    }
+  </section>
+</div>
