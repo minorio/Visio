@@ -5,14 +5,14 @@
 ## 🚀 Features
 
 - **Trending Now:** Real-time popular movies via TMDB API.
-- **Deep Insights:** Detailed info, ratings, and cast for every film.
-- **Personal Vault:** Manage your favorites and liked movies.
+- **Deep Insights:** Detailed info and ratings for every film.
+- **Personal Vault:** Manage your favorites movies.
 - **Smart Search:** Debounced live search with filters.
 
 ## 🛠 Tech Stack
 
-- **Framework:** Angular 18 (Standalone Components)
-- **State Management:** NgRx (Store, Effects, Entity)
+- **Framework:** Angular 21 (Standalone Components)
+- **State Management:** NgRx
 - **Reactive Programming:** RxJS
 - **UI Library:** Angular Material & SCSS
 - **Data Source:** The Movie Database (TMDB) API

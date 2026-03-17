@@ -1,27 +1,40 @@
 <mat-card class="movie-card" appearance="outlined">
-  <img
-    mat-card-image
-    src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
-    alt="Shiba Inu"
-    class="movie-card__image"
-  />
+  @if (movieSignal(); as movie) {
+    <img
+      mat-card-image
+      [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+      [alt]="movie.title"
+      class="movie-card__image"
+    />
 
-  <div class="movie-card__overlay">
-    <mat-card-header class="movie-card__info">
-      <mat-card-title class="movie-card__title">Film obs sa</mat-card-title>
-      <mat-card-subtitle class="movie-card__rating">
-        <span>1.7</span>
-        <mat-icon>star</mat-icon>
-      </mat-card-subtitle>
-    </mat-card-header>
+    <div class="movie-card__overlay">
+      <div class="movie-card__top-actions">
+        <mat-icon
+          class="movie-card__favorite"
+          [class.is-active]="isFavorite"
+          (click)="toggleFavorite($event)"
+          >bookmark</mat-icon
+        >
+      </div>
 
-    <mat-card-actions class="movie-card__actions">
-      <mat-icon
-        class="movie-card__favorite"
-        [class.is-active]="isFavorite"
-        (click)="toggleFavorite()"
-        >bookmark</mat-icon
-      >
-    </mat-card-actions>
-  </div>
+      <div class="movie-card__content">
+        <div class="movie-card__title">
+          {{ movie.title }}
+        </div>
+
+        <div class="movie-card__footer">
+          <span class="movie-card__genre-year">
+            <span class="movie-card__genre">{{ getMovieGenre(movie) }}</span>
+            <span class="movie-card__dot">•</span>
+            <span class="movie-card__year">{{ movie.release_date | slice: 0 : 4 }}</span>
+          </span>
+
+          <span class="movie-card__rating">
+            <mat-icon>star</mat-icon>
+            {{ movie.vote_average | number: '1.1-1' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  }
 </mat-card>
