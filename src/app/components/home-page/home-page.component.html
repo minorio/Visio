@@ -1,13 +1,32 @@
 <div class="home">
-  @if (isLoading() && !movies().length) {
-    <div class="home__loader">
-      <mat-spinner strokeWidth="3" diameter="70"></mat-spinner>
-    </div>
-  }
-
+  <div class="home__controls">
+    <mat-button-toggle-group [value]="loadingMode()" (change)="onModeChange($event.value)">
+      <mat-button-toggle value="classic"> Pagination </mat-button-toggle>
+      <mat-button-toggle value="infinite"> Infinite Scroll </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
   <section class="home__movies-grid">
     @for (movieItem of movies(); track movieItem.id) {
       <movie-card [movie]="movieItem" [genres]="genresMap()"></movie-card>
     }
+
+    @if (isLoading() && loadingMode() === 'infinite') {
+      @for (i of skeletonItems; track $index) {
+        <movie-card-skeleton></movie-card-skeleton>
+      }
+    }
   </section>
+  @if (loadingMode() === 'classic' && !isLoading()) {
+    <div class="home__pagination" [class.is-hidden]="!totalResults()">
+      <mat-paginator
+        [length]="totalResults()"
+        [pageIndex]="pageIndex()"
+        [pageSize]="20"
+        [hidePageSize]="true"
+        [disabled]="isLoading()"
+        (page)="handlePageEvent($event)"
+      >
+      </mat-paginator>
+    </div>
+  }
 </div>
