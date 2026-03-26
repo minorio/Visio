@@ -1,4 +1,6 @@
 .home {
+  padding-bottom: 40px;
+
   &__loader {
     display: flex;
     justify-content: center;
@@ -6,9 +8,73 @@
     height: 70vh;
     width: 100%;
   }
+  &__controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+
+    mat-button-toggle-group {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
   &__movies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 15px;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: end;
+    margin: 40px 0;
+    padding: 10px;
+    transition: opacity 0.3s ease;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+  &.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  ::ng-deep .mat-mdc-paginator {
+    .mat-mdc-paginator-container {
+      justify-content: center !important;
+      padding: 0;
+    }
+
+    .mat-mdc-paginator-range-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      margin: 0 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .mat-mdc-icon-button {
+      width: 44px;
+      height: 44px;
+      margin: 0 4px;
+      transition: all 0.2s ease;
+
+      .mat-mdc-button-touch-target {
+        width: 44px;
+        height: 44px;
+      }
+
+      &:hover:not(.mat-mdc-button-disabled) {
+        background-color: rgba(63, 81, 181, 0.1);
+        color: #3f51b5;
+        transform: scale(1.1);
+      }
+
+      &.mat-mdc-button-disabled {
+        opacity: 0.3;
+      }
+    }
   }
 }
