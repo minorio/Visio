@@ -2,11 +2,14 @@
   @if (movieSignal(); as movie) {
     <img
       mat-card-image
-      [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+      [src]="
+        movie.poster_path
+          ? 'https://image.tmdb.org/t/p/w342' + movie.poster_path
+          : 'https://placehold.co/300x400?text=No+Photo'
+      "
       [alt]="movie.title"
       class="movie-card__image"
     />
-
     <div class="movie-card__overlay">
       <div class="movie-card__top-actions">
         <mat-icon
