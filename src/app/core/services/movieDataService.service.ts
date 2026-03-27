@@ -20,6 +20,21 @@ export class MovieDataService {
       params: { page: page.toString() },
     });
   }
+  public searchMovies(query: string, page: number = 1) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${TMDB_CONFIG.token}`,
+      accept: 'application/json',
+    });
+
+    return this.http.get<MovieResponse>(`${TMDB_CONFIG.baseUrl}/search/movie`, {
+      headers,
+      params: {
+        query: query,
+        page: page.toString(),
+      },
+    });
+  }
+
   public getGenres() {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${TMDB_CONFIG.token}`,
