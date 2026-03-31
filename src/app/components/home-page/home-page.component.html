@@ -17,6 +17,22 @@
       }
     </mat-form-field>
   </div>
+  <movie-filters
+    [genres]="genresList()"
+    [selectedGenre]="selectedGenre()"
+    [selectedSort]="selectedSort()"
+    [selectedYear]="selectedYear()"
+    [selectedRating]="selectedRating()"
+    [selectedCountry]="selectedCountry()"
+    [isDisabled]="!!searchControl.value"
+    [isResetDisabled]="!isFiltersActive()"
+    (genreChanged)="updateFilter(selectedGenre, $event)"
+    (yearChanged)="updateFilter(selectedYear, $event)"
+    (sortChanged)="updateFilter(selectedSort, $event)"
+    (ratingChanged)="updateFilter(selectedRating, $event)"
+    (countryChanged)="updateFilter(selectedCountry, $event)"
+    (resetAll)="resetFilters()"
+  ></movie-filters>
   <div class="home__controls">
     <mat-button-toggle-group [value]="loadingMode()" (change)="onModeChange($event.value)">
       <mat-button-toggle value="classic"> Pagination </mat-button-toggle>
@@ -24,16 +40,29 @@
     </mat-button-toggle-group>
   </div>
   <section class="home__movies-grid">
-    @for (movieItem of movies(); track movieItem.id) {
-      <movie-card [movie]="movieItem" [genres]="genresMap()"></movie-card>
-    }
-
-    @if (isLoading() && loadingMode() === 'infinite') {
+    @if (isLoading() && movies().length === 0) {
       @for (i of skeletonItems; track $index) {
         <movie-card-skeleton></movie-card-skeleton>
       }
+    } @else {
+      @for (movieItem of movies(); track movieItem.id) {
+        <movie-card [movie]="movieItem" [genres]="genresMap()"></movie-card>
+      }
     }
   </section>
+  @if (movies().length === 0 && !isLoading()) {
+    <div class="home__empty-state">
+      <mat-icon>search_off</mat-icon>
+      <h2>No results found</h2>
+      <p>
+        We couldn't find any movies matching your criteria. Try adjusting your filters or search
+        query.
+      </p>
+      <button mat-flat-button color="primary" (click)="resetFilters()">
+        Back to Popular Movies
+      </button>
+    </div>
+  }
   @if (loadingMode() === 'classic' && !isLoading()) {
     <div class="home__pagination" [class.is-hidden]="!totalResults()">
       <mat-paginator
