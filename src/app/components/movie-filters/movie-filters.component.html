@@ -1,0 +1,76 @@
+<div class="home__filters">
+  <mat-form-field appearance="outline" class="home__filter-select">
+    <mat-label>Sort by</mat-label>
+    <mat-select
+      [value]="selectedSort"
+      [disabled]="isDisabled"
+      (selectionChange)="sortChanged.emit($event.value)"
+    >
+      @for (option of sortOptions; track option.value) {
+        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="home__filter-select">
+    <mat-label>Genre</mat-label>
+    <mat-select
+      [value]="selectedGenre"
+      [disabled]="isDisabled"
+      (selectionChange)="genreChanged.emit($event.value)"
+    >
+      <mat-option [value]="null">All genres</mat-option>
+      @for (genre of genres; track genre.id) {
+        <mat-option [value]="genre.id">{{ genre.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="home__filter-select">
+    <mat-label>Year</mat-label>
+    <mat-select
+      [value]="selectedYear"
+      [disabled]="isDisabled"
+      (selectionChange)="yearChanged.emit($event.value)"
+    >
+      <mat-option [value]="null">All years</mat-option>
+      @for (year of yearsList; track year) {
+        <mat-option [value]="year">{{ year }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="home__filter-select">
+    <mat-label>Country</mat-label>
+    <mat-select
+      [value]="selectedCountry"
+      [disabled]="isDisabled"
+      (selectionChange)="countryChanged.emit($event.value)"
+    >
+      <mat-option [value]="null">All countries</mat-option>
+      @for (country of countryOptions; track country.value) {
+        <mat-option [value]="country.value">{{ country.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="home__filter-select">
+    <mat-label>Rating from</mat-label>
+    <mat-select
+      [value]="selectedRating"
+      [disabled]="isDisabled"
+      (selectionChange)="ratingChanged.emit($event.value)"
+    >
+      <mat-option [value]="null">-</mat-option>
+      @for (rate of ratingOptions; track rate) {
+        <mat-option [value]="rate">{{ rate }}+</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <button
+    matButton="filled"
+    color="warn"
+    class="home__filter-reset"
+    [disabled]="isResetDisabled || isDisabled"
+    (click)="resetAll.emit()"
+  >
+    <mat-icon>filter_alt_off</mat-icon>
+    Сбросить всё
+  </button>
+</div>
