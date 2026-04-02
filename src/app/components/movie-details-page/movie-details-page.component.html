@@ -1,0 +1,109 @@
+@if (isLoading()) {
+  <movie-details-skeleton></movie-details-skeleton>
+} @else if (movie(); as details) {
+  <div class="floating-nav">
+    <button mat-flat-button (click)="goBack()" class="btn-nav">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back</span>
+    </button>
+
+    <button mat-stroked-button routerLink="/home" class="btn-nav">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+  </div>
+
+  <div class="details-page">
+    <div
+      class="hero"
+      [style.backgroundImage]="
+        details.backdrop_path
+          ? 'linear-gradient(to right, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.5) 100%), url(https://tmdb.org' +
+            details.backdrop_path +
+            ')'
+          : 'none'
+      "
+    >
+      <div class="hero__overlay">
+        <div class="container">
+          <div class="hero__content">
+            <img
+              [src]="'https://image.tmdb.org/t/p/w500' + details.poster_path"
+              class="hero__poster"
+              [alt]="details.title"
+              referrerpolicy="no-referrer"
+            />
+            <div class="hero__text">
+              <h1 class="hero__title">{{ details.title }}</h1>
+
+              <div class="hero__meta">
+                <div class="rating-massive">
+                  <mat-icon>star</mat-icon>
+                  <span>{{ details.vote_average | number: '1.1-1' }}</span>
+                </div>
+                <div class="meta-pills">
+                  <span class="badge">{{ details.release_date | slice: 0 : 4 }}</span>
+                  <span class="runtime">{{ details.runtime }} min</span>
+                </div>
+              </div>
+
+              <div class="hero__genres">
+                @for (genre of details.genres; track genre.id) {
+                  <span class="genre-chip">{{ genre.name }}</span>
+                }
+              </div>
+
+              @if (details.tagline) {
+                <p class="hero__tagline">"{{ details.tagline }}"</p>
+              }
+              <div class="hero__description">
+                <h3>Overview</h3>
+                <p>{{ details.overview }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      @if (details.credits?.cast?.length) {
+        <section class="cast">
+          <h2 class="section-title">Top Billed Cast</h2>
+          <div class="cast__list horizontal-list" appHorizontalScroll>
+            @for (person of details.credits.cast.slice(0, 10); track person.id) {
+              <div class="cast__card">
+                <div class="cast__img-wrapper">
+                  <img
+                    [src]="
+                      person.profile_path
+                        ? 'https://image.tmdb.org/t/p/w500' + person.profile_path
+                        : 'https://placehold.co/200x280?text=No+Photo'
+                    "
+                    [alt]="person.name"
+                    referrerpolicy="no-referrer"
+                  />
+                </div>
+                <p class="cast__name">{{ person.name }}</p>
+                <p class="cast__role">{{ person.character }}</p>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @if (details?.similar?.results?.length) {
+        <section class="similar">
+          <h2 class="section-title">Similar Movies</h2>
+          <div class="similar__list horizontal-list" appHorizontalScroll>
+            @for (similarMovie of details.similar.results; track similarMovie.id) {
+              <div class="similar__item">
+                <movie-card [movie]="similarMovie" [genres]="genresMap()"></movie-card>
+              </div>
+            }
+          </div>
+        </section>
+      }
+    </div>
+  </div>
+}

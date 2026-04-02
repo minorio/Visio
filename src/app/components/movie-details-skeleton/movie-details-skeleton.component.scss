@@ -1,0 +1,167 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.details-skeleton {
+  background: #fff;
+
+  .skeleton-hero {
+    padding: 60px 0;
+    background: #fcfcfc;
+  }
+
+  .skeleton-content {
+    display: flex;
+    gap: 50px;
+    @media (max-width: 992px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .skeleton-poster {
+    width: 350px;
+    height: 525px;
+    border-radius: 20px;
+    background: #eee;
+  }
+
+  .skeleton-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    @media (max-width: 992px) {
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  .skeleton-title {
+    height: 42px;
+    width: 70%;
+    background: #eee;
+    border-radius: 8px;
+  }
+  .skeleton-meta {
+    height: 32px;
+    width: 40%;
+    background: #eee;
+    border-radius: 6px;
+  }
+  .skeleton-chips {
+    display: flex;
+    gap: 8px;
+    .chip-shimmer {
+      width: 90px;
+      height: 34px;
+      background: #eee;
+      border-radius: 50px;
+    }
+  }
+  .skeleton-tagline {
+    height: 20px;
+    width: 30%;
+    background: #eee;
+    border-radius: 4px;
+  }
+  .skeleton-line {
+    height: 16px;
+    width: 100%;
+    background: #eee;
+    border-radius: 4px;
+  }
+
+  .skeleton-section-title {
+    height: 24px;
+    width: 220px;
+    background: #eee;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+
+  .skeleton-cast-list {
+    display: flex;
+    gap: 25px;
+    overflow: hidden;
+    padding: 10px 0;
+  }
+
+  .skeleton-cast-card {
+    min-width: 140px;
+    text-align: center;
+  }
+
+  .skeleton-cast-img {
+    width: 120px;
+    height: 160px;
+    border-radius: 12px;
+    background: #eee;
+    margin: 0 auto 12px;
+  }
+
+  .skeleton-cast-name {
+    height: 15px;
+    width: 100px;
+    background: #eee;
+    margin: 0 auto 6px;
+    border-radius: 4px;
+  }
+  .skeleton-cast-role {
+    height: 13px;
+    width: 70px;
+    background: #eee;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+
+  .similar-skeleton-item {
+    min-width: 220px;
+    height: 400p;
+  }
+
+  .skeleton-similar-list {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    padding-bottom: 40px;
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background-color: #f6f7f8;
+  &::after {
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.4) 20%,
+      rgba(255, 255, 255, 0.7) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    animation: shimmer 2.5s infinite linear;
+    content: '';
+  }
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.cast {
+  padding: 40px 20px 20px;
+}
+.similar {
+  padding: 20px 20px 40px;
+}

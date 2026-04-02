@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GenreResponse, MovieResponse } from '../../models/movie.model';
+import { GenreResponse, MovieDetails, MovieResponse } from '../../models/movie.model';
 import { TMDB_CONFIG } from '../configs/api.config';
 
 @Injectable({
@@ -9,12 +9,14 @@ import { TMDB_CONFIG } from '../configs/api.config';
 })
 export class MovieDataService {
   constructor(private http: HttpClient) {}
+
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       Authorization: `Bearer ${TMDB_CONFIG.token}`,
       accept: 'application/json',
     });
   }
+
   public searchMovies(query: string, page: number = 1): Observable<MovieResponse> {
     return this.http.get<MovieResponse>(`${TMDB_CONFIG.baseUrl}/search/movie`, {
       headers: this.getHeaders(),
@@ -53,6 +55,15 @@ export class MovieDataService {
     return this.http.get<MovieResponse>(`${TMDB_CONFIG.baseUrl}/discover/movie`, {
       headers: this.getHeaders(),
       params,
+    });
+  }
+
+  public getMovieDetails(id: string): Observable<MovieDetails> {
+    return this.http.get<MovieDetails>(`${TMDB_CONFIG.baseUrl}/movie/${id}`, {
+      headers: this.getHeaders(),
+      params: {
+        append_to_response: 'credits,similar',
+      },
     });
   }
 }

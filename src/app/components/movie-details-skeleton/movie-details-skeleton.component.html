@@ -1,0 +1,47 @@
+<div class="details-skeleton">
+  <div class="skeleton-hero">
+    <div class="container">
+      <div class="skeleton-content">
+        <div class="skeleton-poster shimmer"></div>
+        <div class="skeleton-text">
+          <div class="skeleton-title shimmer"></div>
+          <div class="skeleton-meta shimmer"></div>
+          <div class="skeleton-chips">
+            <div class="chip-shimmer shimmer"></div>
+            <div class="chip-shimmer shimmer"></div>
+            <div class="chip-shimmer shimmer"></div>
+          </div>
+          <div class="skeleton-tagline shimmer"></div>
+          <div class="skeleton-line shimmer"></div>
+          <div class="skeleton-line shimmer" style="width: 85%"></div>
+          <div class="skeleton-line shimmer" style="width: 60%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="cast">
+      <div class="skeleton-section-title shimmer"></div>
+      <div class="skeleton-cast-list">
+        @for (i of [1, 2, 3, 4, 5, 6]; track $index) {
+          <div class="skeleton-cast-card">
+            <div class="skeleton-cast-img shimmer"></div>
+            <div class="skeleton-cast-name shimmer"></div>
+            <div class="skeleton-cast-role shimmer"></div>
+          </div>
+        }
+      </div>
+    </section>
+    <section class="similar">
+      <div class="skeleton-section-title shimmer"></div>
+      <div class="skeleton-similar-list">
+        @for (i of [1, 2, 3, 4]; track $index) {
+          <div class="similar-skeleton-item">
+            <movie-card-skeleton></movie-card-skeleton>
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>

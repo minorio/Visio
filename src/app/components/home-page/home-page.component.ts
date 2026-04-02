@@ -85,7 +85,7 @@ export class HomePageComponent implements OnInit {
         this.genresList.set(data.genres);
 
         const map: Record<number, string> = {};
-        data.genres.forEach((genre) => (map[genre.id] = genre.name));
+        data.genres.forEach((genre: Genre) => (map[genre.id] = genre.name));
         this.genresMap.set(map);
 
         this.loadData(1);
