@@ -1,5 +1,5 @@
-<mat-card class="movie-card" appearance="outlined">
-  @if (movieSignal(); as movie) {
+@if (movieSignal(); as movie) {
+  <mat-card class="movie-card" [routerLink]="['/movie', movie.id]" appearance="outlined">
     <img
       mat-card-image
       [src]="
@@ -40,5 +40,5 @@
         </div>
       </div>
     </div>
-  }
-</mat-card>
+  </mat-card>
+}
