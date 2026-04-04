@@ -1,0 +1,79 @@
+$header-bg: #2e1c2b;
+$logo-pink: #ff4081;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    background-color: $header-bg;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  &__perforation {
+    background-color: $header-bg;
+    height: 14px;
+    width: 100%;
+    mask-image: repeating-linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 12px,
+      #000 12px,
+      #000 26px
+    );
+
+    -webkit-mask-position: calc(var(--scroll-offset, 0) * -0.3px) 0;
+    mask-position: calc(var(--scroll-offset, 0) * -0.3px) 0;
+    will-change: mask-position;
+  }
+
+  &__bottom {
+    background-color: $header-bg;
+    height: 10px;
+  }
+}
+
+.logo {
+  cursor: pointer;
+  line-height: 0.85;
+  color: $logo-pink;
+  font-size: 28px;
+  font-weight: 900;
+  & div:last-child {
+    margin-left: 8px;
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 40px;
+  margin-right: auto;
+  margin-left: 12%;
+
+  &__link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 800;
+    &:hover,
+    &.active {
+      opacity: 0.6;
+    }
+  }
+}
