@@ -1,16 +1,11 @@
 @if (isLoading()) {
   <movie-details-skeleton></movie-details-skeleton>
-} @else if (movie(); as details) {
+} @else if (movieDetails(); as details) {
   <div class="floating-nav">
     <button mat-flat-button (click)="goBack()" class="btn-nav">
       <mat-icon>arrow_back</mat-icon>
       <span>Back</span>
     </button>
-
-    <!-- <button mat-stroked-button routerLink="/home" class="btn-nav">
-      <mat-icon>home</mat-icon>
-      <span>Home</span>
-    </button> -->
   </div>
 
   <div class="details-page">
@@ -34,8 +29,16 @@
               referrerpolicy="no-referrer"
             />
             <div class="hero__text">
-              <h1 class="hero__title">{{ details.title }}</h1>
-
+              <div class="hero__actions">
+                <h1 class="hero__title">{{ details.title }}</h1>
+                <mat-icon
+                  (click)="onToggleFavorite()"
+                  [class.is-active]="isFavorite()"
+                  class="hero__favorite"
+                >
+                  {{ isFavorite() ? 'bookmark' : 'bookmark_border' }}
+                </mat-icon>
+              </div>
               <div class="hero__meta">
                 <div class="rating-massive">
                   <mat-icon>star</mat-icon>

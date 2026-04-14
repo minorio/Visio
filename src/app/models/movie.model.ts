@@ -53,3 +53,8 @@ export interface MovieDetails extends Movie {
     total_results: number;
   };
 }
+
+export interface SortOption {
+  value: string;
+  label: string;
+}

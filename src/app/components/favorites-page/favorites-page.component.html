@@ -1,0 +1,57 @@
+<div class="favorites">
+  <div class="favorites__toolbar">
+    <div class="favorites__search">
+      <mat-form-field appearance="outline" class="favorites__search-field">
+        <mat-label>Search in library</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput [formControl]="searchControl" placeholder="Find a movie..." />
+        @if (searchControl.value) {
+          <button mat-icon-button matSuffix (click)="searchControl.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </div>
+    <div class="favorites__filters-wrapper">
+      <movie-filters
+        [sortOptions]="favoriteSortOptions"
+        [selectedSort]="selectedSort()"
+        (sortChanged)="selectedSort.set($event)"
+      ></movie-filters>
+    </div>
+    <button
+      matButton="filled"
+      color="warn"
+      class="reset-btn"
+      [disabled]="isResetDisabled()"
+      (click)="resetFilters()"
+    >
+      <mat-icon>filter_alt_off</mat-icon>
+      Reset
+    </button>
+  </div>
+  @if (filteredMovies().length > 0) {
+    <div class="movie-grid">
+      @for (movie of filteredMovies(); track movie.id) {
+        <movie-card [movie]="movie" [genres]="genresMap()"></movie-card>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <mat-icon>{{ favoriteMovies().length === 0 ? 'bookmark_border' : 'search_off' }}</mat-icon>
+
+      @if (favoriteMovies().length === 0) {
+        <h2>Your library is empty</h2>
+        <p>
+          You haven't added any movies to your favorites yet. Start exploring to build your
+          collection!
+        </p>
+        <button mat-flat-button color="primary" routerLink="/">Browse Movies</button>
+      } @else {
+        <h2>No matches found</h2>
+        <p>We couldn't find anything matching "{{ searchControl.value }}" in your library.</p>
+        <button mat-flat-button color="primary" (click)="resetFilters()">Clear Search</button>
+      }
+    </div>
+  }
+</div>

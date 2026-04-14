@@ -15,10 +15,11 @@
       <div class="movie-card__top-actions">
         <mat-icon
           class="movie-card__favorite"
-          [class.is-active]="isFavorite"
-          (click)="toggleFavorite($event)"
-          >bookmark</mat-icon
+          [class.is-active]="isFavorite()"
+          (click)="onToggleFavorite($event)"
         >
+          {{ isFavorite() ? 'bookmark' : 'bookmark_border' }}
+        </mat-icon>
       </div>
 
       <div class="movie-card__content">

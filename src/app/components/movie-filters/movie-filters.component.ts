@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Genre } from '../../models/movie.model';
+import { Genre, SortOption } from '../../models/movie.model';
 
 @Component({
   selector: 'movie-filters',
@@ -30,7 +30,7 @@ export class MovieFiltersComponent implements OnInit {
   @Output() countryChanged = new EventEmitter<string | null>();
   @Output() resetAll = new EventEmitter<void>();
 
-  public readonly sortOptions = [
+  @Input() sortOptions: SortOption[] = [
     { value: 'popularity.desc', label: 'Most Popular' },
     { value: 'vote_average.desc', label: 'Top Rated' },
     { value: 'primary_release_date.desc', label: 'Newest' },
