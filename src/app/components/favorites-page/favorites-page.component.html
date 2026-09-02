@@ -14,21 +14,22 @@
     </div>
     <div class="favorites__filters-wrapper">
       <movie-filters
-        [sortOptions]="favoriteSortOptions"
+        [genres]="genresList()"
+        [selectedGenre]="selectedGenre()"
         [selectedSort]="selectedSort()"
-        (sortChanged)="selectedSort.set($event)"
+        [selectedYear]="selectedYear()"
+        [selectedRating]="selectedRating()"
+        [selectedCountry]="selectedCountry()"
+        [isDisabled]="!!searchControl.value"
+        [isResetDisabled]="isResetDisabled()"
+        (genreChanged)="updateFilter(selectedGenre, $event)"
+        (yearChanged)="updateFilter(selectedYear, $event)"
+        (sortChanged)="updateFilter(selectedSort, $event)"
+        (ratingChanged)="updateFilter(selectedRating, $event)"
+        (countryChanged)="updateFilter(selectedCountry, $event)"
+        (resetAll)="resetFilters()"
       ></movie-filters>
     </div>
-    <button
-      matButton="filled"
-      color="warn"
-      class="reset-btn"
-      [disabled]="isResetDisabled()"
-      (click)="resetFilters()"
-    >
-      <mat-icon>filter_alt_off</mat-icon>
-      Reset
-    </button>
   </div>
   @if (filteredMovies().length > 0) {
     <div class="movie-grid">
@@ -49,8 +50,17 @@
         <button mat-flat-button color="primary" routerLink="/">Browse Movies</button>
       } @else {
         <h2>No matches found</h2>
-        <p>We couldn't find anything matching "{{ searchControl.value }}" in your library.</p>
-        <button mat-flat-button color="primary" (click)="resetFilters()">Clear Search</button>
+
+        @if (searchControl.value) {
+          <p>We couldn't find anything matching "{{ searchControl.value }}" in your library.</p>
+          <button mat-flat-button color="primary" (click)="resetFilters()">Clear Search</button>
+        } @else {
+          <p>
+            We couldn't find any movies matching your criteria. Try adjusting your filters or search
+            query.
+          </p>
+          <button mat-flat-button color="primary" (click)="resetFilters()">Clear Filters</button>
+        }
       }
     </div>
   }
