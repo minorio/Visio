@@ -1,5 +1,5 @@
-<div class="home__filters">
-  <mat-form-field appearance="outline" class="home__filter-select">
+<div class="filters">
+  <mat-form-field appearance="outline" class="filter-select">
     <mat-label>Sort by</mat-label>
     <mat-select
       [value]="selectedSort"
@@ -11,7 +11,7 @@
       }
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="home__filter-select">
+  <mat-form-field appearance="outline" class="filter-select">
     <mat-label>Genre</mat-label>
     <mat-select
       [value]="selectedGenre"
@@ -24,7 +24,7 @@
       }
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="home__filter-select">
+  <mat-form-field appearance="outline" class="filter-select">
     <mat-label>Year</mat-label>
     <mat-select
       [value]="selectedYear"
@@ -37,7 +37,7 @@
       }
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="home__filter-select">
+  <mat-form-field appearance="outline" class="filter-select">
     <mat-label>Country</mat-label>
     <mat-select
       [value]="selectedCountry"
@@ -50,7 +50,7 @@
       }
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="home__filter-select">
+  <mat-form-field appearance="outline" class="filter-select">
     <mat-label>Rating from</mat-label>
     <mat-select
       [value]="selectedRating"
@@ -66,7 +66,7 @@
   <button
     matButton="filled"
     color="warn"
-    class="home__filter-reset"
+    class="filter-reset"
     [disabled]="isResetDisabled || isDisabled"
     (click)="resetAll.emit()"
   >
